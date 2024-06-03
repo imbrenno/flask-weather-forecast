@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/flask-basic
+      - PYTHONPATH=/app
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+    command: flask run --host=0.0.0.0
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  tests:
+    build: .
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/test_db
+      - PYTHONPATH=/app
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+    command: coverage run -m pytest -v
+
+volumes:
+  mongo-data:
