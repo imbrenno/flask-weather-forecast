@@ -21,16 +21,5 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  tests:
-    build: .
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/test_db
-      - PYTHONPATH=/app
-    depends_on:
-      - mongo
-    volumes:
-      - .:/app
-    command: coverage run -m pytest -v
-
 volumes:
   mongo-data:

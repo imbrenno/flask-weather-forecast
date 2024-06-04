@@ -1,5 +1,7 @@
-from main.controllers.user_ctrl import bp as user_bp
+from main.controllers.direct_geocoding_ctrl import bp as direct_geocoding_bp
+from main.controllers.weather_forecast_ctrl import bp as weather_forecast_bp
 
 blueprints_ctrl = [
-    user_bp,
+    direct_geocoding_bp,
+    weather_forecast_bp,
 ]
